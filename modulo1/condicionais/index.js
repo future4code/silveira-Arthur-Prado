@@ -105,76 +105,72 @@
     //é o mesmo de jogos domésticos, mas seus preços devem ser multiplicados pelo valor do dólar (considerar o dólar = R$4,10)
 
     const nomeCompleto = prompt("Qual o seu nome completo?")
-        console.log(`Nome do cliente: ${nomeCompleto}`)
 
     let tipoDeJogo = prompt("O Jogo é DO(doméstico) ou IN (internacional?")
-    switch (tipoDeJogo){
-        case 'DO':
-            console.log("Tipo de Jogo: Nacional")
-            break
-        case 'IN':
-            console.log("Tipo de Jogo: Internacional")
-            break
-    }
-     
+   
+    let etapaDoJogo = prompt("O jogo é SF(semi-final), DT(Decisão de terceiro lugar) ou FI(final)?").toUpperCase() 
 
-    let etapaDoJogo = prompt("O jogo é SF(semi-final), DT(Decisão de terceiro lugar) ou FI(final)?")
-    switch (etapaDoJogo){
-        case 'SF':
-            const categoria1SF = 1320
-            const categoria2SF = 880
-            const categoria3SF = 550
-            const categoria4SF = 220
-            console.log("Etapa do Jogo: Semi-final")
-            break
-        case 'DT':
-            const categoria1DT = 660
-            const categoria2DT = 440
-            const categoria3DT = 330
-            const categoria4DT = 170
-            console.log("Etapa do Jogo: Decisão de terceiro lugar")
-            break
-        case 'FI':
-            const categoria1FI = 1980
-            const categoria2FI = 1320
-            const categoria3FI = 880
-            const categoria4FI = 330
-            console.log("Etapa do Jogo: Final")
-            break
-    }
-
-    let categoria = +prompt("Qual categoria você vai querer? 1, 2, 3 ou 4?")
-    switch (categoria, etapaDoJogo){
-        case '1':
-            console.log (`Preço do ingresso: ${etapaDoJogo + categoria}`)
-    }
-    if (categoria === `1`){
-        console.log(`Categoria: ${categoria}`)
-    }
+    let categoria = +prompt(`Qual categoria você vai querer? [1, 2, 3 ou 4?]`)
+    
     let quantidadeIngressos = +prompt("Quantos ingressos você vai querer?")
-        console.log(`Quantidade de Ingressos: ${quantidadeIngressos}`)
+        
+    let valorDoIngresso 
+    
+    if (etapaDoJogo === `SF`){
+        switch (categoria){
+            case 1: 
+                valorDoIngresso = 1320
+                break
+            case 2:
+                valorDoIngresso = 880
+                break
+            case 3:
+                valorDoIngresso = 550
+                break
+            case 4:
+                valorDoIngresso = 220
+                break
+        }
 
+    } else if (etapaDoJogo === `DT`){
+        switch (categoria){
+            case 1: 
+                valorDoIngresso = 660
+                break
+            case 2:
+                valorDoIngresso = 440
+                break
+            case 3:
+                valorDoIngresso = 330
+            case 4: 
+                valorDoIngresso = 170
+                break 
+        }
     
-    
-    
+    } else {
+        switch (categoria){
+            case 1:
+                valorDoIngresso = 1980
+                break
+            case 2:
+                valorDoIngresso = 1320
+                break
+            case 3:
+                valorDoIngresso = 880
+                break
+            case 4:
+                valorDoIngresso = 330  
+                break  
+        }
+    } 
 
-if (categoria1SF * quantidadeIngressos) {
-        console.log("Valor do Ingresso: 1320 reais")    
-        console.log("Valor total =", categoria1SF * quantidadeIngressos)
-    }
-else if (categoria2SF * quantidadeIngressos){
-        console.log("Valor do Ingresso: 880 reais")
-        console.log("Valor total =", categoria2SF * quantidadeIngressos)
-    }
-else if (categoria3SF * quantidadeIngressos){
-        console.log("Valor do Ingresso: 550 reais")
-        console.log("Valor total =", categoria3SF * quantidadeIngressos)
-    }
-else if (categoria4SF * quantidadeIngressos){
-        console.log("Valor do Ingresso: 220 reais")
-        console.log("Valor total =", categoria4SF * quantidadeIngressos)
-    }
-    
-
-    
-
+let valorTotal = valorDoIngresso * quantidadeIngressos
+if (tipoDeJogo === `IN`){
+    valorTotal = valorTotal * 4.10
+}
+console.log(nomeCompleto)
+console.log(`O tipo de jogo é: ${tipoDeJogo}`)
+console.log(`A etapa do jogo é: ${etapaDoJogo}`)
+console.log(`A categoria é: ${categoria}`)
+console.log(`A quantidade de ingressos é: ${quantidadeIngressos}`)
+console.log(`O valor total é: ${valorTotal}`)
