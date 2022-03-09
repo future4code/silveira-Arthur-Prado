@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Adicionar Produto</title>
 </head>
 <body>
@@ -19,28 +20,28 @@
     </div>
 
     
-    <h2>Adicionar Produto</h2>
+    <h2 id="mudaOFundo">Adicionar Produto</h2>
     <form action="">
         <div>
-            <label for="link-foto">Link para foto: </label>
+            <label class="sublinhaTodos" for="link-foto">Link para foto: </label>
             <input type="url" id="link-foto" name="link-foto">
         </div>
         
         <div>
-            <label for="descricao">Descrição do produto: </label>
+            <label class="sublinhaTodos" for="descricao">Descrição do produto: </label>
             <!-- Adicione o id apropriado para o input abaixo -->
             <input type="text" id="descricao" name="descrição">
         </div>
         
         <div>
-            <label for="preco">Preço (em R$): </label>
+            <label class="sublinhaTodos" for="preco">Preço (em R$): </label>
             <!-- Adicione o id apropriado e o type para receber números abaixo -->
             <input type="text" id="preco" name="preço">
         </div>
         
         <div>
             <!-- Preencha as propriedades necessárias para os elementos abaixo -->
-            <label for="quantidade-disponivel">Quantidade disponível:</label>
+            <label class="sublinhaTodos" for="quantidade-disponivel">Quantidade disponível:</label>
             <input type="text" id="quantidade-disponivel" name="quantidade-disponivel">
         </div>
 

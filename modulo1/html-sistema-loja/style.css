@@ -1,0 +1,94 @@
+#imagemInsta {
+    width: 5%;
+    height: 5%;
+    margin-left: 25px;
+}
+
+#imagem1 {
+    width: 5%;
+    height: 5%;
+}
+
+#imagem2 {
+    width: 5%;
+    height: 5%;
+    margin-left: 25px;
+}
+
+#redesSociais {
+    color: blue;
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.infoCabecalho {
+    color: white;
+    font-weight: bold;
+    background-color: green;
+    align-items: center;
+}
+
+.arrumaLinks{
+    color: green;
+    text-decoration:underline; 
+    background-color: aquamarine;
+}
+
+#paginaInicial {
+    margin-left: 10px;
+}
+
+#estoque {
+    margin-left: 325px;
+}
+
+#adicionarProduto {
+    margin-left: 325px;
+}
+
+#funcionarios {
+    margin-left: 325px;
+}
+
+.imagens {
+  align-items: center;
+}
+
+#titulo {
+    background-color: black;
+    color: white;
+}
+
+.negrito {
+    font-weight: bolder;
+}
+
+#sublinhado{
+    text-decoration: underline;
+}
+
+.sublinhaTodos {
+    text-decoration: underline;
+}
+
+#mudaOFundo {
+    background-color: yellow;
+}
+
+.rodape {
+    margin-top: 450px;
+    margin-left: 700px;
+}
+
+#centralizaTitulo {
+    margin-left: 500px;
+}
+
+#centralizaParagrafo {
+    margin-left: 700px;
+}
+
+#paragrafo {
+    margin-top: 50px;
+    font-family: arial black;
+}
