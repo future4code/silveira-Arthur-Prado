@@ -1,0 +1,15 @@
+```function calculaNota(ex, p1, p2) {
+  let mediaPonderada = (ex + p1*2 + p2*3) / 6
+  
+  if (mediaPonderada >= 9) {
+    return 'A'
+  } if (mediaPonderada < 9 && mediaPonderada >= 7.5) {
+    return 'B'
+  } if (mediaPonderada < 7.5 && mediaPonderada >= 6) {
+    return 'C'
+  } if (mediaPonderada < 6) {
+    return 'D'
+  } 
+  return mediaPonderada
+  
+}```
