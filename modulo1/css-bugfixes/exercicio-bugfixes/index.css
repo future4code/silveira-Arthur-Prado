@@ -27,6 +27,7 @@ button:focus {
 
 img {
     width: 50px;
+    /* JA AJUSTANDO A LUPA*/
 }
 
 div>p:first-child {
@@ -57,6 +58,7 @@ div img {
 
 .icone {
     height: 15px;
+    width: 15px;
 }
 
 
