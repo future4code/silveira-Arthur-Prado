@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.cabecalho {
+    background-color: mediumvioletred;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.comeco {
+    display: flex;
+    align-items: center;
+}
+
+#imagem-bolinho {
+    width: 15px;
+    height: 15px;
+    align-self: center;
+    padding: 15px;
+}
+#titulo {
+    font-weight: bold;
+}
+
+
+#login {
+    align-self: center;
+    font-weight: bold;
+    margin-right: 25px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.menu-lateral {
+    display:flex;
+    flex-direction: column;
+    background-color: #f2d0e0;
+    height: 88vh;
+    width: 20vw;
+}
+
+.menu-lateral a {    
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    align-items: center;
+    margin-left: 10px;
+    color: black;
+    font-weight: bold;
+
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+}
+
+.espaco {
+    margin: 20px;
+}
+
+.setinhas {
+    margin-right: 15px;
+}
+
+
+#rodape {
+    display:flex;
+    background-color: mediumvioletred;
+    justify-content: center;
+    height: 6vh;
+    align-items: center;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
