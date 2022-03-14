@@ -118,12 +118,34 @@ body {
 }
 
 
+.card {
+    display:flex;
+    justify-content: baseline;
+    align-items: center;
+}
+
+#imagem-blackjack {
+    margin-left: 120px;
+    width: 70%;
+    margin-top: 80px;
+    height: 430px;
+
+}
 
 
-.voltar-pagina-principal {
-    text-decoration-line: none;
-    color: blue;
-    background-color: whitesmoke;
-    display: block;
+#imagem-sistema-loja{
+    width: 70%;
+    height: 430px;
+    margin-top: 80px;
+    margin-left: 120px;
+}
+
+.arrumando-titulos{
+    display: flex;
+    justify-content: center;
+}
+
+.alinhar {
     text-align: center;
 }
+
