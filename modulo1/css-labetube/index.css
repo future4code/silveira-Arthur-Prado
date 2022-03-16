@@ -112,9 +112,13 @@ body {
 }
 
 @media screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    .rodape {
+    .rodape h2 {
+        display: flex;
         margin-top: 1vw;
-        min-height: 7vh;
+        max-height: 1vw;
+        font-size: large;
+        text-align: center;
+        align-items: center;
     }
 }
     
@@ -128,8 +132,8 @@ body {
         
 @media screen and (min-device-width : 1200px) {
     .rodape {
+        display:flex;
         margin-top: 1vh;
-        min-height: 7vh;
     }
 }
     
