@@ -83,7 +83,7 @@ body {
       align-items: center;
       text-align: center;
       background-color: lightcoral;
-      height: 50px;
+      height: 7vh;
       position: fixed;
       bottom: 0;
       width: 100%;
@@ -110,3 +110,26 @@ body {
     justify-self: center;
     width: 60%;
 }
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .rodape {
+        margin-top: 1vw;
+        min-height: 7vh;
+    }
+}
+    
+@media screen and (min-device-width : 481px) and (max-device-width : 800px) {
+    .rodape {
+        margin-top: 1vh;
+        min-height: 7vh;
+
+    }
+}
+        
+@media screen and (min-device-width : 1200px) {
+    .rodape {
+        margin-top: 1vh;
+        min-height: 7vh;
+    }
+}
+    
