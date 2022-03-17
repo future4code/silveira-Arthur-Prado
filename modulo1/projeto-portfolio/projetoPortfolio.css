@@ -1,0 +1,151 @@
+body {
+    margin: 0;
+    padding-top: 50px;
+}
+
+.cabecalho {
+    background-color: rgba(0, 255, 42, 0.144);
+    height: 50px;
+    position: fixed;
+    display: flex;
+    top: 0;
+    width: 100%;
+    align-items: center;
+}
+
+.items-cabecalho a:hover {
+    background-color: rgb(2, 71, 2);
+    color: white;
+}
+
+.items-cabecalho {
+    margin-left: auto;
+}
+
+.items-cabecalho a {
+    margin-right: 50px;
+}
+
+#meu-nome {
+    color: rgb(2, 71, 2);
+}
+#meu-nome:hover {
+    background-color: rgb(2, 71, 2);
+    color: white;
+}
+
+
+
+.classe-biografia {
+    display: flex;
+    background-color: #0ba360;
+    border: solid;
+    border-width: 10px;
+    align-items: center;
+    justify-content: center;  
+}
+
+#imagem-biografia {
+    max-height: 300px;
+    border-radius: 50%;
+}
+
+#texto-biografia{
+    color: white;
+    
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    margin-top: 30px;
+}
+
+
+
+.instituicoes {
+    height: 290px;
+    background-image: url("img_fence.jpg");
+    display: flex;
+    justify-content:space-evenly; 
+}
+
+.titulo-secao {
+    font-size: 25px;
+    text-decoration: underline;
+    color: #85144b;
+    background-color: white;
+    padding: 15px;
+    min-width: 500px;
+    text-align: center;
+}
+
+#labenu:hover, #pomar:hover, #csd:hover, #unesp:hover {
+    color:white;
+    font-weight: bolder;
+}
+
+
+
+#texto-habilidades { 
+    color:#85144b;
+    text-decoration: underline;
+}
+
+#lista-instituicoes li {
+    font-size: 20px;
+    color: white;
+}
+
+#lista-habilidades li {
+    font-size: 20px;
+    color: white;
+}
+
+#ingles:hover, #digito:hover, #raciocinio:hover, #empatico:hover {
+    color:white;
+    font-weight: bolder;
+}
+
+
+.rodape {
+    display: block;
+    background-color: #0ba360;
+    margin-top: -17px;
+    text-align: center;
+}
+    
+.imagemredes{
+    height: 2.5%;
+    width: 2.5%;
+}
+
+
+.card {
+    display:flex;
+    justify-content: baseline;
+    align-items: center;
+}
+
+#imagem-blackjack {
+    margin-left: 120px;
+    width: 70%;
+    margin-top: 80px;
+    height: 430px;
+
+}
+
+
+#imagem-sistema-loja{
+    width: 70%;
+    height: 430px;
+    margin-top: 80px;
+    margin-left: 120px;
+}
+
+.arrumando-titulos{
+    display: flex;
+    justify-content: center;
+}
+
+.alinhar {
+    text-align: center;
+}
+
