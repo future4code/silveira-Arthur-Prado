@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.cabecalho {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    text-align: center;
+    background-color:lightcoral;
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+#titulo {
+    display: flex;
+    justify-content: left;
+    color: white;
+    position: sticky;
+    background-color: red;
+    border-radius: 20px;
+    padding: 6px 3px;
+    border: 3px solid darkred;
+    margin-left: 10px;
+}
+
+
+#divBusca{
+    background-color:#E0EEEE;
+    border:solid 2px #5F9EA0;
+    border-radius:10px;
+    width:300px;
+    height:50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-right: 30px;
+  }
+
+  .imagens-videos {
+      width: 300px;
+  }
+
+  .imagens-videos img {
+      width: 100%;
+  }
+
+  .imagens-videos a {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2%;
+    border: 3px solid black;
+    box-shadow: 2px 3px 10px #00000096;
+}
+
+  #coluna-um {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0;
+}
+
+  
+  .rodape {
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: lightcoral;
+      height: 7vh;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+.corpo-pagina {
+        display: flex;
+        flex-direction: column;
+}
+
+.video-pagina {
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
+}
+
+.titulo-video {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.corpo-pagina video {
+    justify-self: center;
+    width: 60%;
+}
+
+@media screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .rodape h2 {
+        display: flex;
+        margin-top: 1vw;
+        max-height: 1vw;
+        font-size: large;
+        text-align: center;
+        align-items: center;
+    }
+}
+    
+@media screen and (min-device-width : 481px) and (max-device-width : 800px) {
+    .rodape {
+        margin-top: 1vh;
+        min-height: 7vh;
+
+    }
+}
+        
+@media screen and (min-device-width : 1200px) {
+    .rodape {
+        display:flex;
+        margin-top: 1vh;
+    }
+}
+    
