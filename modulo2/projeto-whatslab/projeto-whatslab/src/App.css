@@ -1,0 +1,26 @@
+.App {
+  display: flex;
+  margin: auto;
+  width: 40vw;
+  height: 95vh;
+  border: solid black 1px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  border: solid black 1px;
+  width: 40vw;
+  margin: auto;
+  height: 5vh;
+}
+
+.input-mensagem {
+  
+}
+
+.input-usuario {
+  margin-left: 0;
+}
