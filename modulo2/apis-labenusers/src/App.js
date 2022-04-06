@@ -12,6 +12,7 @@ class App extends React.Component {
     inputEmail: "",
     currentPage: "signUp",
     users: [],
+    inputEdit: false,
   };
 
   onChangeInputName = (event) => {
@@ -89,10 +90,38 @@ class App extends React.Component {
     }
   };
 
-  deleteUsers = (id) => {
+  onClickUserDetails = (id) => {
+    const url = `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`;
 
-    if (window.confirm ("Você realmente deseja apagar este usuário?") === false) {
-      return
+    axios
+      .get(url, { headers: headers })
+      .then((response) => {
+        this.setState({
+          currentPage: "userDetails",
+          name: response.data.name,
+          email: response.data.email,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  };
+
+  goToUsersPage = () => {
+    this.setState({
+      currentPage: "users",
+    });
+  };
+
+  editUser = () => {
+
+  };
+
+  deleteUsers = (id) => {
+    if (
+      window.confirm("Você realmente deseja apagar este usuário?") === false
+    ) {
+      return;
     }
     const url = `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`;
 
@@ -105,6 +134,18 @@ class App extends React.Component {
         console.log(error.response.data);
       });
   };
+
+  showInput = () => {
+    if (this.state.inputEdit === false)
+    this.setState ({
+      inputEdit: true
+    })
+    if (this.state.inputEdit === true) {
+      this.setState ({
+      inputEdit: false
+    })
+    }
+  }
 
   render() {
     if (this.state.currentPage === "signUp") {
@@ -136,7 +177,10 @@ class App extends React.Component {
           <ol>
             {this.state.users.map((user) => {
               return (
-                <li key={user.id}>
+                <li
+                  onClick={() => this.onClickUserDetails(user.id)}
+                  key={user.id}
+                >
                   {user.name}
                   <button onClick={() => this.deleteUsers(user.id)}>❌</button>
                 </li>
@@ -146,11 +190,23 @@ class App extends React.Component {
         </div>
       );
     }
-    return (
-      <div>
-        <p>Página Não encontrada</p>
-      </div>
-    );
+
+    if (this.state.currentPage === "userDetails")
+      return (
+        <div>
+          <button onClick={this.goToUsersPage}>Voltar</button>
+          <p> {this.state.name} </p>
+          <p> {this.state.email} </p>
+          <button onClick={this.showInput}>
+             <input
+             
+             
+             /> 
+            
+            Editar
+          </button>
+        </div>
+      );
   }
 }
 
