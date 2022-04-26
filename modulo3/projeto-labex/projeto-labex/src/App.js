@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import styled from 'styled-components'
+import Router from './routes/Router';
 
 const App = () => {
   return (
     <div>
-      <p>Hello World!</p>
+      <Router/>
     </div>
   );
 }
