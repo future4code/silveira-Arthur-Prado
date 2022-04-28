@@ -22,7 +22,7 @@ export const goToApplicationFormPage = (navigate) => {
 }
 
 export const goToLoginPage = (navigate) => {
-    navigate("/trips/login")
+    navigate("/login")
 }
 
 export const goToCreateTripPage = (navigate) => {
