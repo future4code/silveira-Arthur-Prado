@@ -3,9 +3,34 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { goBack, goToLoginPage } from "../routes/coordinator";
 import axios from "axios";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const CardCandidate = styled.div`
-  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const Buttons = styled.button`
+  display: flex;
+  background-color: #4caf50;
+  border: solid 1px black;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s linear;
+  margin: 0 auto;
+  &:hover {
+    background-color: aquamarine;
+  }
 `;
 
 const TripDetailsPage = () => {
@@ -70,13 +95,12 @@ const TripDetailsPage = () => {
         <p>Idade: {candidate.age} </p>
         <p>País: {candidate.country} </p>
         <p>Texto de aplicação: {candidate.applicationText} </p>
-        <p> {candidate.id} </p>
-        <button onClick={() => decideCandidates(candidate.id, true)}>
+        <Buttons onClick={() => decideCandidates(candidate.id, true)}>
           Aprovar
-        </button>
-        <button onClick={() => decideCandidates(candidate.id, false)}>
+        </Buttons>
+        <Buttons onClick={() => decideCandidates(candidate.id, false)}>
           Reprovar
-        </button>
+        </Buttons>
       </CardCandidate>
     );
   });
@@ -89,24 +113,27 @@ const TripDetailsPage = () => {
         <p>Idade: {candidate.age} </p>
         <p>País: {candidate.country} </p>
         <p>Texto de aplicação: {candidate.applicationText} </p>
-        <p> {candidate.id} </p>
       </CardCandidate>
     );
   });
 
   return (
     <div>
-      <p>Nome: {detailsTrip.name}</p>
+    <Header/>
+    <CardCandidate>
+      <h3>Nome: {detailsTrip.name}</h3>
       <p>Duração em dias: {detailsTrip.durationInDays}</p>
       <p>Planeta: {detailsTrip.planet}</p>
       <p>Data: {detailsTrip.date}</p>
       <p>Descrição: {detailsTrip.description}</p>
-      <button onClick={() => goBack(navigate)}> Voltar </button>
-      <h3>Candidatos Pendentes</h3>
+      <Buttons onClick={() => goBack(navigate)}> Voltar </Buttons>
+      <h2>Candidatos Pendentes</h2>
       {mappedCandidates}
 
-      <h3>Candidatos Aprovados</h3>
+      <h2>Candidatos Aprovados</h2>
       {approvedCandidates}
+    </CardCandidate>
+    <Footer/>
     </div>
   );
 };

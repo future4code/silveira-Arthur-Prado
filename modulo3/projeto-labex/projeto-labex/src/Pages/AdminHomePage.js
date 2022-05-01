@@ -8,6 +8,46 @@ import {
   goToTripDetailsPage
 } from "../routes/coordinator";
 import axios from 'axios'
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+const CardStyle = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  border: solid black 2px;
+  align-content: flex-start;
+  height: 10vh;
+`
+const Body = styled.div`
+  margin-bottom: 179px;
+`
+
+const SpanCard = styled.span`
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 0;
+`
+
+const Buttons = styled.button`
+  display: flex;
+  justify-content: center;
+  background-color: #4caf50;
+  border: solid 1px black;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: auto;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s linear;
+  &:hover {
+    background-color: aquamarine;
+  }
+`;
+
 
 const AdminHomePage = () => {
 
@@ -71,22 +111,26 @@ const AdminHomePage = () => {
 
   const mapTripsName = tripName.map((trip) => {
     return(
-      <div>
-        <span value={trip.id} onClick={() => goToDetailsPage(trip.id)}>{trip.name}</span> 
-        <button key={trip.id} value={trip.id} onClick={() => onClickDelete(trip.id)}>Deletar</button>
-      </div>
+      <CardStyle>
+        <SpanCard value={trip.id} onClick={() => goToDetailsPage(trip.id)}><h3>{trip.name}</h3></SpanCard> 
+        <Buttons key={trip.id} value={trip.id} onClick={() => onClickDelete(trip.id)}>Deletar</Buttons>
+      </CardStyle>
     )
   })
 
   return (
     <div>
+      <Header/>
+      <Body>
       {mapTripsName}
-      <button onClick={() => goToHomePage(navigate)}> Voltar </button>
-      <button onClick={() => goToCreateTripPage(navigate)}>
+      <Buttons onClick={() => goToHomePage(navigate)}> Voltar </Buttons>
+      <Buttons onClick={() => goToCreateTripPage(navigate)}>
         {" "}
         Criar Viagem{" "}
-      </button>
-      <button onClick={() => logout()}> Deslogar </button>
+      </Buttons>
+      <Buttons onClick={() => logout()}> Deslogar </Buttons>
+      </Body>
+      <Footer/>
     </div>
   );
 };

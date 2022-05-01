@@ -5,6 +5,37 @@ import { goBack } from "../routes/coordinator";
 import useForm from "../hooks/useForm";
 import axios from "axios";
 import Countries from "../countries/Countries";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+const FormStyle = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  height: 72vh;
+`;
+
+const Buttons = styled.button`
+  display: flex;
+  background-color: #4caf50;
+  border: solid 1px black;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s linear;
+  margin: 0 auto;
+  &:hover {
+    background-color: aquamarine;
+  }
+`;
 
 const ApplicationFormPage = () => {
   const { form, onChange, clearFields } = useForm({
@@ -16,7 +47,7 @@ const ApplicationFormPage = () => {
   });
 
   const [trips, setTrips] = useState([]);
-  const [chosenTrip, setChosenTrip] = useState("")
+  const [chosenTrip, setChosenTrip] = useState("");
 
   const urlTrips =
     "https://us-central1-labenu-apis.cloudfunctions.net/labeX/arthur-prado-silveira/trips";
@@ -43,7 +74,7 @@ const ApplicationFormPage = () => {
       .post(url, form)
       .then(() => {
         alert("Você está inscrito!");
-        clearFields()
+        clearFields();
       })
       .catch((error) => {
         console.log(error.data);
@@ -52,22 +83,27 @@ const ApplicationFormPage = () => {
 
   const navigate = useNavigate();
 
-
   const handleTripChange = (event) => {
-    setChosenTrip (event.target.value)
-  }
+    setChosenTrip(event.target.value);
+  };
 
   const countryOptions = Countries.map((country) => {
     return <option key={country.nome}>{country.nome}</option>;
   });
 
   const tripOptions = trips.map((trip) => {
-    return <option value={trip.id} key={trip.id}> {trip.name} </option>;
+    return (
+      <option value={trip.id} key={trip.id}>
+        {" "}
+        {trip.name}{" "}
+      </option>
+    );
   });
 
   return (
     <div>
-      <form onSubmit={subscribeToTrip}>
+      <Header />
+      <FormStyle onSubmit={subscribeToTrip}>
         <select value={chosenTrip} onChange={handleTripChange} required>
           <option value="">Escolha uma viagem</option>
           {tripOptions}
@@ -114,11 +150,11 @@ const ApplicationFormPage = () => {
           <option value={""}>Escolha um país</option>
           {countryOptions}
         </select>
-        <button> Enviar </button>
-      </form>
-      <div>
-        <button onClick={() => goBack(navigate)}> Voltar </button>
-      </div>
+        <Buttons> Enviar </Buttons>
+        <Buttons onClick={() => goBack(navigate)}> Voltar </Buttons>
+      </FormStyle>
+      <div></div>
+      <Footer />
     </div>
   );
 };

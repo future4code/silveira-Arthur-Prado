@@ -1,9 +1,44 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { goBack, goToAdminHomePage } from "../routes/coordinator";
+import { goToHomePage, goToAdminHomePage } from "../routes/coordinator";
 import useForm from "../hooks/useForm";
 import axios from "axios";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+const Body = styled.div`
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 78vh;
+`;
+
+const Buttons = styled.button`
+  display: flex;
+  background-color: #4caf50;
+  border: solid 1px black;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s linear;
+  margin: 0 auto;
+  &:hover {
+    background-color: aquamarine;
+  }
+`;
+
+const InputsStyle = styled.input`
+  display: flex;
+  flex-direction: column;
+`
 
 const LoginPage = () => {
   const url =
@@ -43,9 +78,11 @@ const LoginPage = () => {
 
   return (
     <div>
+      <Header/>
+      <Body>
       <h1> Login </h1>
       <form onSubmit={login}>
-        <input
+        <InputsStyle
           name={"email"}
           value={form.email}
           onChange={onChange}
@@ -53,7 +90,7 @@ const LoginPage = () => {
           required
           type={"email"}
         />
-        <input
+        <InputsStyle
           name={"password"}
           value={form.password}
           onChange={onChange}
@@ -61,11 +98,14 @@ const LoginPage = () => {
           required
           type={"password"}
         />
-        <button> Entrar </button>
+        <Buttons> Entrar </Buttons>
       </form>
       <div>
-        <button onClick={() => goBack(navigate)}> Voltar </button>
+      <Buttons onClick={() => goToHomePage(navigate)}> Voltar </Buttons>
       </div>
+      </Body>
+      
+      <Footer/>
     </div>
   );
 };
