@@ -1,59 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { goToFeedPage, goToSignUpPage } from "../../routes/coordinator";
-import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
-import useForm from "../../hooks/useForm";
-import { BASE_URL } from "../../constants/urls";
-import axios from "axios";
+import LoginForm from "./LoginForm";
+
 
 const LoginPage = () => {
-  const [form, onChange, clear] = useForm({ email: "", password: "" });
-  const navigate = useNavigate();
-
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-    const url = `${BASE_URL}/users/login`;
-    const body = {
-      email: form.email,
-      password: form.password,
-    };
-    axios
-      .post(url, body)
-      .then((response) => {
-        localStorage.token = response.data.token
-        clear();
-        goToFeedPage(navigate);
-      })
-      .catch((error) => {
-        console.log(error.data);
-      });
-  };
-
   return (
     <div>
-      <h1>LabEddit</h1>
-      <p> O projeto de rede social da Labenu</p>
-      <form onSubmit={handleOnSubmit}>
-        <TextField
-          name={"email"}
-          label="email"
-          value={form.email}
-          onChange={onChange}
-        />
-        <TextField
-          name={"password"}
-          value={form.password}
-          label="password"
-          onChange={onChange}
-        />
-        <Button type="submit" variant="contained">
-          Continuar
-        </Button>
-        <Button variant="contained" onClick={() => goToSignUpPage(navigate)}>
-          Crie uma conta
-        </Button>
-      </form>
+      <LoginForm />
     </div>
   );
 };

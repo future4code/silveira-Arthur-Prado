@@ -5,66 +5,80 @@ import { BASE_URL } from "../../constants/urls";
 import Header from "../../components/Header/Header";
 import { Button, Checkbox, TextField } from "@mui/material";
 import { goToFeedPage } from "../../routes/coordinator";
+import { InputsContainer } from "../LoginPage/styled";
+import { useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
-  const [form, onChange, clear] = useForm({
-    name: "",
+  const navigate = useNavigate()
+  const [form, onChange] = useForm({
+    username: "",
     email: "",
     password: "",
   });
 
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const handleOnSubmitSignIn = (event) => {
     event.preventDefault();
     const url = `${BASE_URL}/users/signup`;
-    const body = {
-      username: form.name,
-      email: form.email,
-      password: form.password,
-    };
-    axios.post(url, body)
-    .then((response) => {
-        localStorage.token = response.data.token
-        goToFeedPage()
-        clear()
-    })
-    .catch((error) => {
-        console.log(error.data)
-    })
+   
+    axios
+      .post(url, form)
+      .then((response) => {
+        localStorage.token = response.data.token;
+        goToFeedPage(navigate);
+      })
+      .catch((error) => {
+        alert(error.data);
+      });
   };
 
   return (
     <div>
       <Header />
-      <h1>Olá, boas vindas ao LabEddit!</h1>
-      <form onSubmit={handleOnSubmitSignIn}>
-        <TextField
-          name={"name"}
-          value={form.name}
-          label="name"
-          onChange={onChange}
-        />
-        <TextField
-          name={"email"}
-          label="email"
-          value={form.email}
-          onChange={onChange}
-        />
-        <TextField
-          name={"password"}
-          value={form.password}
-          label="password"
-          onChange={onChange}
-        />
+      <InputsContainer>
+        <h1>Olá, boas vindas ao LabEddit!</h1>
+        <form onSubmit={handleOnSubmitSignIn}>
+          <TextField
+            name={"username"}
+            value={form.username}
+            label={"username"}
+            onChange={onChange}
+            fullWidth
+            margin={"normal"}
+            required
+          />
+          <TextField
+            name={"email"}
+            label={"email"}
+            value={form.email}
+            onChange={onChange}
+            fullWidth
+            margin={"normal"}
+            required
+            type={"email"}
+          />
+          <TextField
+            name={"password"}
+            value={form.password}
+            label={"password"}
+            onChange={onChange}
+            fullWidth
+            margin={"normal"}
+            required
+            type={"password"}
+          />
 
-        <p>Ao continuar, você concorda com o nosso contrato de usuário e nossa política de privacidade</p>
-        <Checkbox {...label} />
-        <Button type="submit" variant="contained">
-          Cadastrar
-        </Button>
-      </form>
+          <p>
+            Ao continuar, você concorda com o nosso contrato de usuário e nossa
+            política de privacidade
+          </p>
+          <Checkbox {...label} />
+          <Button type="submit" variant="contained">
+            Cadastrar
+          </Button>
+        </form>
+      </InputsContainer>
     </div>
   );
 };
