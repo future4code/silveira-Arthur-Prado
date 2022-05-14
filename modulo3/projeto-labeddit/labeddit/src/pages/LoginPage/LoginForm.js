@@ -1,13 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { goToFeedPage, goToLoginPage, goToSignUpPage } from "../../routes/coordinator";
+import {
+  goToFeedPage,
+  goToLoginPage,
+  goToSignUpPage,
+} from "../../routes/coordinator";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import useForm from "../../hooks/useForm";
 import { BASE_URL } from "../../constants/urls";
 import axios from "axios";
-import { InputsContainer } from "./styled";
-import Header from "../../components/Header/Header";
 
 const LoginForm = () => {
   const [form, onChange, clear] = useForm({ email: "", password: "" });
@@ -23,22 +25,18 @@ const LoginForm = () => {
     axios
       .post(url, body)
       .then((response) => {
-        localStorage.token = response.data.token
+        localStorage.token = response.data.token;
         clear();
         goToFeedPage(navigate);
       })
       .catch((error) => {
-        alert(error.data)
-        goToLoginPage()
+        alert(error.data);
+        goToLoginPage();
       });
   };
 
   return (
     <div>
-    <Header/>
-    <InputsContainer>
-      <h1>LabEddit</h1>
-      <p> O projeto de rede social da Labenu</p>
       <form onSubmit={handleOnSubmit}>
         <TextField
           name={"email"}
@@ -67,7 +65,6 @@ const LoginForm = () => {
           Crie uma conta
         </Button>
       </form>
-    </InputsContainer>
     </div>
   );
 };

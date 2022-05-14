@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { goToPostPage } from "../../routes/coordinator";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../../constants/urls";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Header from "../../components/Header/Header";
 import PostCard from "../../components/Card/PostCard";
 import styled from "styled-components";
-
-const Votes = styled.p`
-    margin-left: 30px;
-`
-const  PageTitle = styled.h1`
-    justify-content: center;
-    text-align: center;
-    margin-top: 60px;
-`
+import useToken from "../../hooks/useToken";
+import { Box } from "@mui/system";
+import useForm from "../../hooks/useForm";
 
 const FeedPage = () => {
   const navigate = useNavigate();
-  const [getPosts, setGetPosts] = useState([]);
+  useToken();
+  const [posts, setPosts] = useState([]);
+  const [form, onChange, clear] = useForm({
+    title: "qualquer titulo",
+    body: "",
+  });
 
-  const url = `${BASE_URL}/posts`;
   const { token } = localStorage;
+  const url = `${BASE_URL}/posts`;
+
+  const createPost = () => {
+    axios
+      .post(url, form, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(() => {
+        getPosts();
+        clear();
+      })
+      .catch((error) => {
+        console.log(error.data);
+      });
+  };
 
   const onClickLike = (id, direction) => {
     const urlPosts = `${BASE_URL}/posts/${id}/votes`;
@@ -37,13 +52,13 @@ const FeedPage = () => {
         },
       })
       .then(() => {
-        posts();
+        getPosts();
       })
       .catch((error) => {
         console.log(error.data);
       });
   };
-  const posts = () => {
+  const getPosts = () => {
     axios
       .get(url, {
         headers: {
@@ -52,29 +67,41 @@ const FeedPage = () => {
       })
 
       .then((response) => {
-        setGetPosts(response.data);
+        setPosts(response.data);
       })
       .catch((error) => {
         console.log(error.data);
       });
   };
   useEffect(() => {
-    posts();
+    getPosts();
   }, []);
 
-  const mappedPosts = getPosts.map((post) => {
+  const deletePostVote = (id) => {
+    const url = `${BASE_URL}/posts/${id}/votes`;
+    axios
+      .delete(url, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then(() => {
+        getPosts();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const mappedPosts = posts.map((post) => {
     return (
       <div key={post.id}>
-        <PostCard />
-        <h3>Nome: {post.username}</h3>
-        <p>Mensagem: {post.body}</p>
-        <Button value={post.id} onClick={() => onClickLike(post.id, 1)}>
-          👍 <Votes>{post.voteSum}</Votes>
-        </Button>
-
-        <Button value={post.id} onClick={() => onClickLike(post.id, -1)}>
-          👎
-        </Button>
+        <PostCard
+          deleteVote={deletePostVote}
+          post={post}
+          onClickLike={onClickLike}
+          onClick={() => goToPostPage(navigate, post.id)}
+        />
       </div>
     );
   });
@@ -82,9 +109,22 @@ const FeedPage = () => {
   return (
     <div>
       <Header />
-      <PageTitle>Lista de Posts</PageTitle>
+      <Box my={"20px"} mx={"10px"}>
+        <TextField
+          name={"body"}
+          value={form.body}
+          label={"Escreva sua mensagem"}
+          onChange={onChange}
+          multiline
+          rows={4}
+          maxRows={8}
+          fullWidth
+        />
+      </Box>
+      <Button variant="contained" onClick={createPost}>
+        Postar
+      </Button>
       {mappedPosts}
-      <Button onClick={() => goToPostPage(navigate)}>Abrir Post</Button>
     </div>
   );
 };

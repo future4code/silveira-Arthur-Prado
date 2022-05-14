@@ -9,6 +9,14 @@ import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate()
+  const isLoggedOut = localStorage.token === undefined 
+
+  const deleteToken = () => {
+   delete localStorage.token
+   goToLoginPage(navigate)
+  }
+
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -16,7 +24,8 @@ const Header = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             LabEddit
           </Typography>
-          <Button onClick={() => goToLoginPage(navigate)} color="inherit">Login</Button>
+
+          {!isLoggedOut && <Button onClick={() => deleteToken()} color="inherit">Logout</Button>}
         </Toolbar>
       </AppBar>
     </Box>
