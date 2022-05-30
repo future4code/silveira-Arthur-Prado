@@ -1,0 +1,15 @@
+{
+  "name": "node-package-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "clear && node ./index.js",
+    "ex1": "clear && node ./exercicio1/index.js",
+    "ex2": "clear && node ./exercicio2/index.js",
+    "ex3": "clear && node ./exercicio3/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
