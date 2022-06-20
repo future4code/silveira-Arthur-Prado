@@ -68,3 +68,7 @@ class Bank {
   }
 }
 
+const userArray = [newUser]
+const bank = new Bank(userArray)
+console.log(bank.getAccount())
+
