@@ -11,11 +11,6 @@ import Footer from "../components/Footer";
 const Body = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  margin: 10px;
-  height: 72vh;
 `;
 
 const Buttons = styled.button`
@@ -36,13 +31,6 @@ const Buttons = styled.button`
     background-color: aquamarine;
   }
 `;
-
-const FormStyle = styled.form`
-  display: flex;
-  flex-direction: column;
-`
-
-
 
 const CreateTripPage = () => {
   const { form, onChange, clearFields } = useForm({
