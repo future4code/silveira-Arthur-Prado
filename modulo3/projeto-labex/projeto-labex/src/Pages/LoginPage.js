@@ -6,39 +6,29 @@ import useForm from "../hooks/useForm";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Body from "../components/BodyStyle";
+import Buttons from "../components/ButtonsStyle";
 
-const Body = styled.div`
+
+const Login = styled.div`
+  color: white;
   display: flex;
   margin: auto;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 78vh;
 `;
 
-const Buttons = styled.button`
-  display: flex;
-  background-color: #4caf50;
-  border: solid 1px black;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.2s linear;
-  margin: 0 auto;
-  &:hover {
-    background-color: aquamarine;
-  }
-`;
+const DivButton = styled.div`
+ margin: 10px;
+`
 
 const InputsStyle = styled.input`
   display: flex;
   flex-direction: column;
-`
+  margin: 10px;
+  padding: 10px;
+`;
 
 const LoginPage = () => {
   const url =
@@ -58,54 +48,51 @@ const LoginPage = () => {
         goToAdminHomePage(navigate);
       })
       .catch(() => {
-        alert ('Email e/ou senha errados')
+        alert("Email e/ou senha errados");
         cleanFields();
       });
   };
 
   const navigate = useNavigate();
-  
-  useEffect (() => {
+
+  useEffect(() => {
     if (localStorage.token !== undefined) {
-      console.log(localStorage.token)
-      goToAdminHomePage(navigate)
+      console.log(localStorage.token);
+      goToAdminHomePage(navigate);
     }
-  }, [])
- 
-
-
-
+  }, []);
 
   return (
     <div>
-      <Header/>
+      <Header />
       <Body>
-      <h1> Login </h1>
-      <form onSubmit={login}>
-        <InputsStyle
-          name={"email"}
-          value={form.email}
-          onChange={onChange}
-          placeholder="E-mail"
-          required
-          type={"email"}
-        />
-        <InputsStyle
-          name={"password"}
-          value={form.password}
-          onChange={onChange}
-          placeholder="Password"
-          required
-          type={"password"}
-        />
-        <Buttons> Entrar </Buttons>
-      </form>
-      <div>
-      <Buttons onClick={() => goToHomePage(navigate)}> Voltar </Buttons>
-      </div>
+        <Login>
+          <h1> Login </h1>
+          <form onSubmit={login}>
+            <InputsStyle
+              name={"email"}
+              value={form.email}
+              onChange={onChange}
+              placeholder="E-mail"
+              required
+              type={"email"}
+            />
+            <InputsStyle
+              name={"password"}
+              value={form.password}
+              onChange={onChange}
+              placeholder="Password"
+              required
+              type={"password"}
+            />
+          </form>
+          <DivButton>
+          <Buttons onClick={login}> Entrar </Buttons>
+          <Buttons onClick={() => goToHomePage(navigate)}> Voltar </Buttons>
+          </DivButton>
+        </Login>
       </Body>
-      
-      <Footer/>
+      <Footer />
     </div>
   );
 };

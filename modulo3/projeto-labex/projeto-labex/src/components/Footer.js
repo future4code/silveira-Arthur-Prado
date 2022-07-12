@@ -2,10 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 const FooterStyle = styled.div`
-  background-color: #4CAF50; 
+  background-color: blueviolet; 
+  display: flex;
+  justify-content: center;
+    align-items: center;
     padding: 10px;
     text-align: center;
-    height: 10%;
+    height: 5vh;
     
 `
 
@@ -13,7 +16,7 @@ const Footer = () => {
    
     return (
         <FooterStyle>
-            <p> Aqui você encontra viagens para todo o sistema solar! Aproveite! </p>
+            <p><b> 🚀 Aqui você encontra viagens para todo o sistema solar! Aproveite! 🚀</b> </p>
         </FooterStyle>
     )
 }

@@ -10,43 +10,37 @@ import {
 import axios from 'axios'
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CardStyle from "../components/CardStyle";
+import Body from "../components/BodyStyle";
+import Buttons from "../components/ButtonsStyle";
 
-const CardStyle = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  border: solid black 2px;
-  align-content: flex-start;
-  height: 10vh;
-`
-const Body = styled.div`
-  margin-bottom: 179px;
-`
 
 const SpanCard = styled.span`
   display: flex;
   justify-content: center;
-  margin-left: auto;
-  margin-right: 0;
+  :hover {
+    text-decoration-line: underline;
+    cursor: pointer;
+  }
 `
 
-const Buttons = styled.button`
+const ButtonsDiv = styled.div`
   display: flex;
+  margin: 10px;
+`
+
+const ButtonDelete = styled.button`
+display: flex;
   justify-content: center;
-  background-color: #4caf50;
-  border: solid 1px black;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
+  background-color: blueviolet;
   margin: auto;
-  border-radius: 50%;
+  border: 0;
   cursor: pointer;
   transition: 0.2s linear;
   &:hover {
-    background-color: aquamarine;
+    background-color: black;
   }
-`;
+`
 
 
 const AdminHomePage = () => {
@@ -56,7 +50,7 @@ const AdminHomePage = () => {
   const url = "https://us-central1-labenu-apis.cloudfunctions.net/labeX/arthur-prado-silveira/trips"
 
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const axiosConfig = {
     headers: {
@@ -113,7 +107,7 @@ const AdminHomePage = () => {
     return(
       <CardStyle>
         <SpanCard value={trip.id} onClick={() => goToDetailsPage(trip.id)}><h3>{trip.name}</h3></SpanCard> 
-        <Buttons key={trip.id} value={trip.id} onClick={() => onClickDelete(trip.id)}>Deletar</Buttons>
+        <ButtonDelete key={trip.id} value={trip.id} onClick={() => onClickDelete(trip.id)}>🗑️</ButtonDelete>
       </CardStyle>
     )
   })
@@ -123,12 +117,11 @@ const AdminHomePage = () => {
       <Header/>
       <Body>
       {mapTripsName}
+      <ButtonsDiv>
       <Buttons onClick={() => goToHomePage(navigate)}> Voltar </Buttons>
-      <Buttons onClick={() => goToCreateTripPage(navigate)}>
-        {" "}
-        Criar Viagem{" "}
-      </Buttons>
+      <Buttons onClick={() => goToCreateTripPage(navigate)}> Criar Viagem </Buttons>
       <Buttons onClick={() => logout()}> Deslogar </Buttons>
+      </ButtonsDiv>
       </Body>
       <Footer/>
     </div>

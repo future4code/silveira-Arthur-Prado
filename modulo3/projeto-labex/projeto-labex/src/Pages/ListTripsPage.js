@@ -6,33 +6,10 @@ import { goToApplicationFormPage } from "../routes/coordinator";
 import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CardStyle from "../components/CardStyle";
+import Body from "../components/BodyStyle";
+import Buttons from "../components/ButtonsStyle";
 
-
-const TripCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: solid 2px black;
-`;
-
-const Buttons = styled.button`
-  display: flex;
-  background-color: #4caf50;
-  border: solid 1px black;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.2s linear;
-  margin: 0 auto;
-  &:hover {
-    background-color: aquamarine;
-  }
-`;
 
 const ListTripsPage = () => {
   const [showTripsList, setShowTripsList] = useState([]);
@@ -55,26 +32,30 @@ const ListTripsPage = () => {
 
   const mapTripsList = showTripsList.map((trip) => {
     return (
-      <TripCard>
+      <CardStyle>
         <h3>{trip.name}</h3>
-        <p>Duração em dias: {trip.durationInDays}</p>
-        <p>Para qual planeta: {trip.planet}</p>
-        <p>Data da viagem: {trip.date}</p>
-        <p>Descrição da viagem: {trip.description}</p>
-      </TripCard>
+        <p><b>Duração em dias: </b>{trip.durationInDays}</p>
+        <p><b>Para qual planeta:</b> {trip.planet}</p>
+        <p><b>Data da viagem:</b> {trip.date}</p>
+        <p><b>Descrição da viagem:</b> {trip.description}</p>
+      </CardStyle>
     );
   });
 
   return (
     <div>
       <Header />
+      <Body>
       {mapTripsList}
+      <div>
       <Buttons onClick={() => goBack(navigate)}>
         Voltar 
         </Buttons>
       <Buttons onClick={() => goToApplicationFormPage(navigate)}>
         Inscrever-se
       </Buttons>
+      </div>
+      </Body>
       <Footer />
     </div>
   );

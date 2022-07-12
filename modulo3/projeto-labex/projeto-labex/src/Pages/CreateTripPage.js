@@ -7,30 +7,22 @@ import axios from "axios";
 import Planets from "../planets/Planets";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Body from "../components/BodyStyle";
+import Buttons from "../components/ButtonsStyle";
+import InputsStyle from "../components/InputsStyle";
 
-const Body = styled.div`
+const FormStyle = styled.form`
   display: flex;
   flex-direction: column;
 `;
-
-const Buttons = styled.button`
-  display: flex;
-  background-color: #4caf50;
-  border: solid 1px black;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  margin: 4px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.2s linear;
-  margin: 0 auto;
-  &:hover {
-    background-color: aquamarine;
-  }
+const SelectStyle = styled.select`
+  margin: 10px;
+  padding: 10px;
 `;
+
+const Titulo = styled.h1`
+  color: white;
+`
 
 const CreateTripPage = () => {
   const { form, onChange, clearFields } = useForm({
@@ -50,7 +42,6 @@ const CreateTripPage = () => {
   }, []);
 
   const createTrip = (event) => {
-    event.preventDefault();
     const url =
       "https://us-central1-labenu-apis.cloudfunctions.net/labeX/arthur-prado-silveira/trips";
     const axiosConfig = {
@@ -79,9 +70,9 @@ const CreateTripPage = () => {
     <div>
       <Header />
       <Body>
-        <h1>Criar Viagem</h1>
+        <Titulo>Criar Viagem</Titulo>
         <FormStyle onSubmit={createTrip}>
-          <input
+          <InputsStyle
             name={"name"}
             value={form.name}
             onChange={onChange}
@@ -90,7 +81,7 @@ const CreateTripPage = () => {
             type={"name"}
             pattern={"^.{5,}"}
           />
-          <select
+          <SelectStyle
             name={"planet"}
             value={form.planet}
             onChange={onChange}
@@ -98,17 +89,17 @@ const CreateTripPage = () => {
           >
             <option value="">Escolha um planeta</option>
             {planetOptions}
-          </select>
-          <input
+          </SelectStyle>
+          <InputsStyle
             name={"date"}
             value={form.date}
             onChange={onChange}
             placeholder="Data do evento"
             required
             type={"date"}
-            min={new Date().toLocaleDateString("en-ca")} //necessário para colocar no formato ano-mes-dia, que o input date precisa
+            min={new Date().toLocaleDateString("en-ca")} //necessário para colocar no formato ano-mes-dia, que o InputsStyle date precisa
           />
-          <input
+          <InputsStyle
             name={"description"}
             value={form.description}
             onChange={onChange}
@@ -116,7 +107,7 @@ const CreateTripPage = () => {
             required
             pattern={"^.{30,}"}
           />
-          <input
+          <InputsStyle
             name={"durationInDays"}
             value={form.durationInDays}
             onChange={onChange}
@@ -125,10 +116,12 @@ const CreateTripPage = () => {
             type="number"
             min={50}
           />
-          <Buttons> Criar </Buttons>
+          
         </FormStyle>
-
+        <div>
+        <Buttons onClick={() => createTrip()}> Criar </Buttons>
         <Buttons onClick={() => goBack(navigate)}> Voltar </Buttons>
+        </div>
       </Body>
       <Footer />
     </div>
