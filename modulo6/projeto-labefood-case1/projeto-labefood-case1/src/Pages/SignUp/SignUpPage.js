@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BaseURL } from "../../Constants/BaseURL";
 import useForm from "../../Hooks/useForm";
 import axios from "axios";
 import { goToSignUpAdressPage } from "../../Routes/Coordinator";
 import { useNavigate } from "react-router-dom";
+import Titulo from "../../Components/Titulo";
+import InputsStyled from "../../Components/InputsStyled";
+import SignUpStyled from "./SignUpStyled";
+import ButtonsStyled from "../../Components/ButtonsStyled";
+import Header from "../../Components/Header";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -22,17 +27,21 @@ const SignUpPage = () => {
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         goToSignUpAdressPage(navigate);
-        clearFields()
       })
       .catch((error) => {
         alert(error.data);
-        clearFields()
+        clearFields();
       });
   };
 
   return (
-    <div>
-      <input
+    <SignUpStyled>
+      <Header />
+      <Titulo />
+      <p>
+        <b>Cadastrar</b>
+      </p>
+      <InputsStyled
         name={"name"}
         value={form.name}
         onChange={onChange}
@@ -40,7 +49,7 @@ const SignUpPage = () => {
         required
         type={"name"}
       />
-      <input
+      <InputsStyled
         name={"email"}
         value={form.email}
         onChange={onChange}
@@ -48,7 +57,7 @@ const SignUpPage = () => {
         required
         type={"email"}
       />
-      <input
+      <InputsStyled
         name={"cpf"}
         value={form.cpf}
         onChange={onChange}
@@ -56,7 +65,7 @@ const SignUpPage = () => {
         required
         type={"cpf"}
       />
-      <input
+      <InputsStyled
         name={"password"}
         value={form.password}
         onChange={onChange}
@@ -64,8 +73,8 @@ const SignUpPage = () => {
         required
         type={"password"}
       />
-      <button onClick={() => signUp()}>Cadastrar</button>
-    </div>
+      <ButtonsStyled onClick={() => signUp()}>Criar</ButtonsStyled>
+    </SignUpStyled>
   );
 };
 

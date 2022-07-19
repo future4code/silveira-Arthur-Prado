@@ -2,8 +2,17 @@ import React, { useEffect } from "react";
 import { BaseURL } from "../../Constants/BaseURL";
 import useForm from "../../Hooks/useForm";
 import axios from "axios";
-import { goToFeedPage, goToSignUpAdressPage } from "../../Routes/Coordinator";
+import {
+  goToFeedPage,
+  goToSignUpAdressPage,
+  goToSignUpPage,
+} from "../../Routes/Coordinator";
 import { useNavigate } from "react-router-dom";
+import Titulo from "../../Components/Titulo";
+import Header from "../../Components/Header";
+import InputsStyled from "../../Components/InputsStyled";
+import ButtonsStyled from "../../Components/ButtonsStyled";
+import LoginStyled from "./LoginStyled";
 
 const LoginPage = () => {
   const { form, onChange, clearFields } = useForm({
@@ -27,18 +36,20 @@ const LoginPage = () => {
         if (response.data.user.hasAddress === true) {
           goToFeedPage(navigate);
         }
-        clearFields();
+        
       })
-      .catch((error) => {
-        alert(error.data);
+      .catch(() => {
+        alert('Usuário não encontrado.');
+        clearFields();
       });
   };
-  
-  
+
   return (
-    <div>
-      <h2>Login</h2>
-      <input
+    <LoginStyled>
+      <Header/>
+      <Titulo/>
+      <p><b>Entrar</b></p>
+      <InputsStyled
         name={"email"}
         type={"email"}
         value={form.email}
@@ -46,7 +57,7 @@ const LoginPage = () => {
         placeholder="Email"
         required
       />
-      <input
+      <InputsStyled
         name={"password"}
         type={"password"}
         value={form.password}
@@ -54,8 +65,11 @@ const LoginPage = () => {
         placeholder="Senha"
         required
       />
-      <button onClick={() => login()}>Entrar</button>
-    </div>
+      <ButtonsStyled onClick={() => login()}>Entrar</ButtonsStyled>
+      <p onClick={() => goToSignUpPage(navigate)}>
+        <b>Não Possui cadastro? Clique aqui.</b>
+      </p>
+    </LoginStyled>
   );
 };
 
