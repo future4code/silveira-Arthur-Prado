@@ -19,10 +19,10 @@ const SignUpPage = () => {
     password: "",
   });
 
-  const signUp = () => {
+  const signUp = async () => {
     const url = `${BaseURL}/signUp`;
 
-    axios
+    await axios
       .post(url, form)
       .then((response) => {
         localStorage.setItem("token", response.data.token);

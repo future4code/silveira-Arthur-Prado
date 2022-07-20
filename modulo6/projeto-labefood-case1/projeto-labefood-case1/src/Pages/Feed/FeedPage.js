@@ -1,16 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import CardStyle, {
   ImgStyled,
   NameStyled,
   ParagraphStyled,
 } from "../../Components/CardStyle";
 import InputsStyled from "../../Components/InputsStyled";
-import { goToLoginPage } from "../../Routes/Coordinator";
 import styled from "styled-components";
 import FeedStyled from "./FeedStyled";
 import Footer from "../../Components/Footer";
+import useProtectedPage from "../../Hooks/useProtectedPage";
 
 const HeaderStyle = styled.div`
   display: flex;
@@ -28,33 +27,36 @@ const TitleStyle = styled.div`
 
 
 
-const headers = {
-  auth: localStorage.getItem("token"),
-};
+
 
 const FeedPage = () => {
-  const [cardDetails, setCardDetails] = useState();
+  useProtectedPage()
+  const [restaurants, setRestaurants] = useState([{}]);
+  // const [controlInputBusca, setControlInputBusca] = useState();
 
-  const navigate = useNavigate();
+  const headers = {
+    auth: localStorage.getItem("token"),
+  };
 
-  useEffect(() => {
+  const showRestaurants =  (() => {
     const url =
       "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants";
-    axios
-      .get(url, { headers: headers })
-      .then((response) => {     
-        setCardDetails(response.data.restaurants);
+      axios
+      .get(url, { headers: headers }) 
+      .then((response)  => {     
+        setRestaurants(response.data.restaurants);
       })
       .catch((error) => {
-            alert('Você não está logado.')
-            goToLoginPage(navigate)
             console.log(error.data)
       });
-  }, []);
+  });
+   useEffect(()  => {
+     showRestaurants()
+  }, [])
 
-  const cardMapeado = cardDetails?.map((detalhe) => {
+  const cardMapeado = restaurants?.map((detalhe, index) => {
     return (
-      <CardStyle>
+      <CardStyle key={index}>
         <ImgStyled src={`${detalhe.logoUrl}`} alt=""></ImgStyled>
         <NameStyled>
           <b>{detalhe.name}</b>
@@ -69,7 +71,26 @@ const FeedPage = () => {
     );
   });
 
+  // const onChangeInputBusca = (event) => {
+  //   setControlInputBusca({controlInputBusca: event.target.value})
+  // }
   
+  // const cardFiltrado = restaurants?.filter((propriedade) => {
+  //     return(
+  //       <CardStyle>
+  //       <ImgStyled src={`${propriedade.logoUrl}`} alt=""></ImgStyled>
+  //       <NameStyled>
+  //         <b>{propriedade.name.includes(controlInputBusca)}</b>
+  //       </NameStyled>
+  //       <ParagraphStyled>
+  //         <b>Tempo de entrega: </b> {propriedade.deliveryTime} min
+  //       </ParagraphStyled>
+  //       <ParagraphStyled>
+  //         <b>Frete:</b> R${propriedade.shipping},00
+  //       </ParagraphStyled>
+  //     </CardStyle>
+  //     )
+  // })
 
   return (
     <div>
@@ -80,7 +101,15 @@ const FeedPage = () => {
           </TitleStyle>
         </HeaderStyle>
         <InputsStyled placeholder="🔍 Restaurante" />
-        <div>{cardMapeado}</div>
+        <div>
+          {cardMapeado}
+          {/* {cardFiltrado.map((card) => {
+            return (
+              {logoUrl}
+              {deliveryTime}
+              {card.shipping}            )
+          })} */}
+        </div>
         <Footer />
       </FeedStyled>
     </div>

@@ -22,33 +22,36 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    clearFields()
+  }, [])
+
   const login = () => {
     const url = `${BaseURL}/login`;
-
     axios
       .post(url, form)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
-        clearFields()
         if (response.data.user.hasAddress === false) {
           goToSignUpAdressPage(navigate);
         }
         if (response.data.user.hasAddress === true) {
           goToFeedPage(navigate);
         }
-        
       })
       .catch(() => {
-        alert('Usuário não encontrado.');
         clearFields();
+        alert("Usuário não encontrado.");
       });
   };
 
   return (
     <LoginStyled>
-      <Header/>
-      <Titulo/>
-      <p><b>Entrar</b></p>
+      <Header />
+      <Titulo />
+      <p>
+        <b>Entrar</b>
+      </p>
       <InputsStyled
         name={"email"}
         type={"email"}
