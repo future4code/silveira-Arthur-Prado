@@ -10,6 +10,9 @@ import styled from "styled-components";
 import FeedStyled from "./FeedStyled";
 import Footer from "../../Components/Footer";
 import useProtectedPage from "../../Hooks/useProtectedPage";
+import FilterByType from "../../Components/FilterByType";
+import { goToRestaurantsPage } from "../../Routes/Coordinator";
+import { useNavigate } from "react-router-dom";
 
 const HeaderStyle = styled.div`
   display: flex;
@@ -25,72 +28,74 @@ const TitleStyle = styled.div`
   font-family: Roboto, Bold, 16px Center;
 `;
 
-
-
-
-
 const FeedPage = () => {
-  useProtectedPage()
+  useProtectedPage();
   const [restaurants, setRestaurants] = useState([{}]);
-  // const [controlInputBusca, setControlInputBusca] = useState();
+  const [controlInputBusca, setControlInputBusca] = useState("");
+  const [categoria, setCategoria] = useState("")
+
+  const navigate = useNavigate()
 
   const headers = {
     auth: localStorage.getItem("token"),
   };
 
-  const showRestaurants =  (() => {
+  const showRestaurants = () => {
     const url =
       "https://us-central1-missao-newton.cloudfunctions.net/rappi4A/restaurants";
-      axios
-      .get(url, { headers: headers }) 
-      .then((response)  => {     
+    axios
+      .get(url, { headers: headers })
+      .then((response) => {
         setRestaurants(response.data.restaurants);
       })
       .catch((error) => {
-            console.log(error.data)
+        console.log(error.data);
       });
-  });
-   useEffect(()  => {
-     showRestaurants()
-  }, [])
+  };
+  useEffect(() => {
+    showRestaurants();
+  }, []);
 
-  const cardMapeado = restaurants?.map((detalhe, index) => {
-    return (
-      <CardStyle key={index}>
-        <ImgStyled src={`${detalhe.logoUrl}`} alt=""></ImgStyled>
-        <NameStyled>
-          <b>{detalhe.name}</b>
-        </NameStyled>
-        <ParagraphStyled>
-          <b>Tempo de entrega: </b> {detalhe.deliveryTime} min
-        </ParagraphStyled>
-        <ParagraphStyled>
-          <b>Frete:</b> R${detalhe.shipping},00
-        </ParagraphStyled>
-      </CardStyle>
-    );
-  });
+  const onChangeInputBusca = (event) => {
+    setControlInputBusca(event.target.value);
+  };
 
-  // const onChangeInputBusca = (event) => {
-  //   setControlInputBusca({controlInputBusca: event.target.value})
-  // }
-  
-  // const cardFiltrado = restaurants?.filter((propriedade) => {
-  //     return(
-  //       <CardStyle>
-  //       <ImgStyled src={`${propriedade.logoUrl}`} alt=""></ImgStyled>
-  //       <NameStyled>
-  //         <b>{propriedade.name.includes(controlInputBusca)}</b>
-  //       </NameStyled>
-  //       <ParagraphStyled>
-  //         <b>Tempo de entrega: </b> {propriedade.deliveryTime} min
-  //       </ParagraphStyled>
-  //       <ParagraphStyled>
-  //         <b>Frete:</b> R${propriedade.shipping},00
-  //       </ParagraphStyled>
-  //     </CardStyle>
-  //     )
-  // })
+
+
+  const cardsFiltrados = restaurants?.filter((card) => {
+      if (controlInputBusca === "") {
+        return card;
+      }
+      else if (card.name.toLowerCase().includes(controlInputBusca.toLowerCase())) {
+        return card;
+      }
+      return false
+    })
+    .filter((card) => {
+      if (card.category === categoria || categoria === "") {
+        return card
+      }
+      return false
+    })
+    .map((card, index) => {
+      return (
+        <CardStyle onClick={() => goToRestaurantsPage(navigate, card.id)} key={index}>
+          <ImgStyled src={`${card.logoUrl}`} alt=""></ImgStyled>
+          <NameStyled>
+            <b>{card.name}</b>
+          </NameStyled>
+          <ParagraphStyled>
+            <b>Tempo de entrega: </b> {card.deliveryTime} min
+          </ParagraphStyled>
+          <ParagraphStyled>
+            <b>Frete:</b> R${card.shipping},00
+          </ParagraphStyled>
+        </CardStyle>
+      );
+    });
+
+    console.log(categoria)
+
 
   return (
     <div>
@@ -100,16 +105,13 @@ const FeedPage = () => {
             <h2>Rappi4</h2>
           </TitleStyle>
         </HeaderStyle>
-        <InputsStyled placeholder="🔍 Restaurante" />
-        <div>
-          {cardMapeado}
-          {/* {cardFiltrado.map((card) => {
-            return (
-              {logoUrl}
-              {deliveryTime}
-              {card.shipping}            )
-          })} */}
-        </div>
+        <InputsStyled
+          value={controlInputBusca}
+          onChange={onChangeInputBusca}
+          placeholder="🔍 Restaurante"
+        />
+        <FilterByType setCategoria={setCategoria} />
+        <div>{cardsFiltrados}</div>
         <Footer />
       </FeedStyled>
     </div>
