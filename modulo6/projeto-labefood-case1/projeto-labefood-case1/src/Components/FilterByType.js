@@ -6,8 +6,8 @@ const FilterByType = (props) => {
   const DivCategorias = styled.div`
     display: flex;
     overflow-x: scroll;
-    width: 100%;
-    margin: 15px;
+    width: 90%;
+    margin-left: 20px;
   `
 
   const ButtonStyled = styled.button`

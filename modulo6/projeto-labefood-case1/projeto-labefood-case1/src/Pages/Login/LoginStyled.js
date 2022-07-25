@@ -5,5 +5,6 @@ const LoginStyled = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 `
 export default LoginStyled

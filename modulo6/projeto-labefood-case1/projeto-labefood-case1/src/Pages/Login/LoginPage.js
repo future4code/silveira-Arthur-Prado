@@ -9,7 +9,6 @@ import {
 } from "../../Routes/Coordinator";
 import { useNavigate } from "react-router-dom";
 import Titulo from "../../Components/Titulo";
-import Header from "../../Components/Header";
 import InputsStyled from "../../Components/InputsStyled";
 import ButtonsStyled from "../../Components/ButtonsStyled";
 import LoginStyled from "./LoginStyled";
@@ -23,8 +22,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    clearFields()
-  }, [])
+    clearFields();
+  }, []);
 
   const login = () => {
     const url = `${BaseURL}/login`;
@@ -47,7 +46,6 @@ const LoginPage = () => {
 
   return (
     <LoginStyled>
-      <Header />
       <Titulo />
       <p>
         <b>Entrar</b>
