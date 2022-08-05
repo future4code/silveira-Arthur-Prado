@@ -1,16 +1,15 @@
 import React from "react";
-import { CardStyle, MainContainer } from "./MovieCardStyle";
+import { CardStyle, PosterStyled, StyledDate, StyledTitle } from "./MovieCardStyle";
+
 
 const MovieCard = ({ movie, onClick }) => {
 
   return (
-    <MainContainer>
       <CardStyle onClick={onClick}>
-        {/* <img src={movie.backdrop_path} alt="Poster do filme"/> */}
-        {movie.title}
-        {movie.release_date}
+        <PosterStyled src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="Capa do filme"/> 
+        <StyledTitle>{movie.title}</StyledTitle>
+        <StyledDate>{movie.release_date}</StyledDate>
       </CardStyle>
-    </MainContainer>
   );
 };
 

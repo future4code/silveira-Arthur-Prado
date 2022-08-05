@@ -3,22 +3,40 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Base_Url } from "../../constants/Base_Url";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { goToMovieDetailsPage } from "../../Routes/Coordinator";
+import { ButtonStyled, DivCategorias, MoviesContainer } from "./FeedPageStyle";
+
 
 const FeedPage = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState("");
+  const [genres, setGenres] = useState([]);
 
-  const { id } = useParams()
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMovies();
+    getMoviesGenres();
   }, [page]);
 
   const changePage = (pageNumber) => {
     setPage(pageNumber);
+  };
+
+  const getMoviesGenres = () => {
+    const url = `${Base_Url}/genre/movie/list?api_key=304f38d2697865af31bf9a473a064c42`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        console.log(response.data.genres);
+        setGenres(response.data.genres);
+      })
+      .catch((error) => {
+        console.log(error.data);
+      });
   };
 
   const getMovies = () => {
@@ -34,33 +52,66 @@ const FeedPage = () => {
       });
   };
 
-   const onClickGoToMovieDetails = (id) => {
-        goToMovieDetailsPage(navigate, id)
-   }
+  const onClickGoToMovieDetails = (id) => {
+    goToMovieDetailsPage(navigate, id);
+  };
 
-  const mappedMovies = movies.map((movie) => {
-    return <MovieCard key={movie.id} movie={movie} onClick={() => onClickGoToMovieDetails(movie.id)} />;
+  const filteredGenres = genres.map((genre) => {
+    const setGenre = () => {
+      if (filter === genre.id) {
+        setFilter("");
+      } else {
+        setFilter(genre.id);
+      }
+    };
+    return (
+      <ButtonStyled
+        key={genre.id}
+        onClick={setGenre}
+        isSelected={filter === genre.id}
+      >
+        <b>{genre.name}</b>
+      </ButtonStyled>
+    );
   });
 
-  const pageButtons = Array.from(Array(5)).map((_, index) => {
-        const initialPage = Math.min(496, page)
-        const buttonIndex = initialPage + index
-        return (
-          <button
-            disabled={buttonIndex === page}
-            onClick={() => changePage(buttonIndex)}
-            key={buttonIndex}
-          >
-            {buttonIndex}
-          </button>
-        );
-      })
+  const filteredMovies = movies
+    .filter((movie) => {
+      if (movie.genre_ids.includes(filter) || filter === "") {
+        return true;
+      }
+      return false;
+    })
+    .map((movie) => {
+      return (
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          onClick={() => onClickGoToMovieDetails(movie.id)}
+        />
+      );
+    });
 
+  const pageButtons = Array.from(Array(5)).map((_, index) => {
+    const initialPage = Math.min(496, page);
+    const buttonIndex = initialPage + index;
+    return (
+      <button
+        disabled={buttonIndex === page}
+        onClick={() => changePage(buttonIndex)}
+        key={buttonIndex}
+      >
+        {buttonIndex}
+      </button>
+    );
+  });
 
   return (
-    <div>
-      Feed
-      {mappedMovies}
+    <div style={{ width: "100vw" }}>
+      <DivCategorias>
+        {filteredGenres}
+      </DivCategorias>
+      <MoviesContainer>{filteredMovies}</MoviesContainer>
       {page !== 1 && (
         <>
           <button onClick={() => changePage(1)}> Primeira </button>
@@ -68,7 +119,7 @@ const FeedPage = () => {
         </>
       )}
       {pageButtons}
-      {page !== 500 && ( 
+      {page !== 500 && (
         <>
           <button onClick={() => changePage(page + 1)}> &#62; </button>
           <button onClick={() => changePage(500)}> Última </button>

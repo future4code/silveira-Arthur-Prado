@@ -19,7 +19,7 @@ const MovieDetailsPage = () => {
 
         axios.get(url)
         .then((response) => {
-            console.log(response.data)
+            console.log(response.data.genres)
             setMovie(response.data)
             setGenres(response.data.genres)
         })
@@ -36,6 +36,7 @@ const MovieDetailsPage = () => {
   
     return(
         <div>
+            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="Capa do filme"/>
             {movie.title}
             <p>{movie.release_date}(BR)</p>
             {getGenres}
