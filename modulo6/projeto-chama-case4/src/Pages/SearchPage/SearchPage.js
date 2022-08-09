@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import RepoCard from "../../Components/RepoCard";
 import Base_Url from "../../Constants/Base_Url";
 import UseForm from "../../Hooks/UseForm";
 import { goToHistoryPage } from "../../Routes/Coordinator";
@@ -15,6 +16,8 @@ import {
 
 const SearchPage = () => {
   const [user, setUser] = useState({});
+  const [repos, setRepos] = useState([])
+  // const [history, setHistory] = useState([])
 
   const { form, onChange, clearFields } = UseForm({
     search: "",
@@ -28,9 +31,28 @@ const SearchPage = () => {
     axios
       .get(url)
       .then((response) => {
+        const termo = {
+          userName: form.search, 
+          timeStamp: Date.now()
+        } 
+        const currentHistory = JSON.parse(localStorage.getItem('history')) || []
+        const index = currentHistory.findIndex((term) => {
+          return term.userName === form.search
+        })
+
+        const isRepeated = index !== -1
+
+        if(!isRepeated) {
+          localStorage.setItem('history', JSON.stringify([...currentHistory, termo]))
+        }
+        else{
+          currentHistory[index].timeStamp = Date.now()
+          localStorage.setItem('history', JSON.stringify(currentHistory))
+        }
+        
         console.log(response.data);
         setUser(response.data);
-        console.log(getRepos());
+        getRepos(response.data.repos_url)
         clearFields();
       })
       .catch((error) => {
@@ -39,18 +61,22 @@ const SearchPage = () => {
       });
   };
 
-  const getRepos = () => {
-    const url = `${Base_Url}/search/repositories?name`;
-
+  const getRepos = (url) => {
+    console.log(url)
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
+        setRepos(response.data);
+        console.log(response.data)
       })
       .catch((error) => {
         console.log(error.data);
       });
   };
+
+  const mappedRepos = repos.map((repo) => {
+    return <RepoCard key={repo.id} repo={repo} />
+  })
 
   return (
     <MainContainer>
@@ -73,10 +99,10 @@ const SearchPage = () => {
         <ImageUser src={user.avatar_url} />
         <h3>{user.name}</h3>
         <p>
-          <b>Email:</b> {user.email ? user.email : "Não informado"}
+          <b>Email:</b> {user.email || "Não informado"}
         </p>
         <p>
-          <b>Bio:</b> {user.bio ? user.bio : "Não informado"}
+          <b>Bio:</b> {user.bio || "Não informado"}
         </p>
         <p>
           <b>Login:</b> {user.login}
@@ -84,6 +110,7 @@ const SearchPage = () => {
         <p>
           <b>Id:</b> {user.id}
         </p>
+        {mappedRepos}
       </ContainerInfo>
       : false}
     </MainContainer>
