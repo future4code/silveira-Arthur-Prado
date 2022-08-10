@@ -25,6 +25,7 @@ export const ButtonStyled = styled.button`
   }
   :hover {
     cursor: pointer;
+    background-color: blue;
   }
 `;
 
@@ -33,3 +34,18 @@ export const MoviesContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
 `;
+
+export const ContainerPages = styled.div`
+  display: flex;
+  margin: 10px;
+  align-items: center;
+  justify-content: center;
+`
+
+export const ButtonPages = styled.button`
+  margin: 2px;
+`
+
+export const MainContainer = styled.div`
+  margin: 0;
+`

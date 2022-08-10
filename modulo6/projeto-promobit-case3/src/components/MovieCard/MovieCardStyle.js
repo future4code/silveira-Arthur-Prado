@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const CardStyle = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 0 10px;
+    margin: 15px 10px;
     max-height: 320px;
     width: 150px;
     justify-content: space-between;

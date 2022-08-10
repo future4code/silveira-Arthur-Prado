@@ -5,7 +5,7 @@ import { Base_Url } from "../../constants/Base_Url";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import { useNavigate } from "react-router-dom";
 import { goToMovieDetailsPage } from "../../Routes/Coordinator";
-import { ButtonStyled, DivCategorias, MoviesContainer } from "./FeedPageStyle";
+import { ButtonPages, ButtonStyled, ContainerPages, DivCategorias, MoviesContainer } from "./FeedPageStyle";
 
 
 const FeedPage = () => {
@@ -96,13 +96,13 @@ const FeedPage = () => {
     const initialPage = Math.min(496, page);
     const buttonIndex = initialPage + index;
     return (
-      <button
+      <ButtonPages
         disabled={buttonIndex === page}
         onClick={() => changePage(buttonIndex)}
         key={buttonIndex}
       >
         {buttonIndex}
-      </button>
+      </ButtonPages>
     );
   });
 
@@ -112,19 +112,22 @@ const FeedPage = () => {
         {filteredGenres}
       </DivCategorias>
       <MoviesContainer>{filteredMovies}</MoviesContainer>
+      <ContainerPages>
       {page !== 1 && (
         <>
-          <button onClick={() => changePage(1)}> Primeira </button>
-          <button onClick={() => changePage(page - 1)}> &#60; </button>
+          <ButtonPages onClick={() => changePage(1)}> Primeira </ButtonPages>
+          <ButtonPages onClick={() => changePage(page - 1)}> &#60; </ButtonPages>
         </>
       )}
+      
       {pageButtons}
       {page !== 500 && (
         <>
-          <button onClick={() => changePage(page + 1)}> &#62; </button>
-          <button onClick={() => changePage(500)}> Última </button>
+          <ButtonPages onClick={() => changePage(page + 1)}> &#62; </ButtonPages>
+          <ButtonPages onClick={() => changePage(500)}> Última </ButtonPages>
         </>
       )}
+      </ContainerPages>
     </div>
   );
 };
