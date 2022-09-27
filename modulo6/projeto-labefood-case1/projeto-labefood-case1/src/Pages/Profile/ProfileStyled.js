@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const HeaderProfile = styled.div`
     display: flex;
-    justify-content: center;
     width: 100%;
     border-bottom: 1px solid #000;
     margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-between;
 `
 export const HeaderParagraph = styled.p`
-    margin: 10px 0;
+    margin: 10px 157px 10px 0;
 `
 
 export const CardAddress = styled.div`

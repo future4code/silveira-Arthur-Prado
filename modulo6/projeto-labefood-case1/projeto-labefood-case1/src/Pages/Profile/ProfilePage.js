@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BaseURL } from "../../Constants/BaseURL";
+import { goBack } from "../../Routes/Coordinator";
 import { CardAddress, HeaderParagraph, HeaderProfile, MarginParagraphs, OrderHistory, OrderHistoryParagraph } from "./ProfileStyled";
 
 const ProfilePage = () => {
@@ -31,6 +32,7 @@ const ProfilePage = () => {
   return (
     <div>
       <HeaderProfile>
+        <p onClick={() => goBack(navigate)}>↩</p>
         <HeaderParagraph>
           <b>Meu perfil</b>
         </HeaderParagraph>
