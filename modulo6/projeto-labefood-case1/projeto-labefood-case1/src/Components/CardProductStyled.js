@@ -16,10 +16,9 @@ const ContainerImage = styled.div`
 const MainContainer = styled.div`
   display: flex;
   text-align: flex-start;
-  width: 100%;
   border: solid 1px grey;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin: 20px 20px;
 `;
 const ContainerDetails = styled.div`
   display: flex;

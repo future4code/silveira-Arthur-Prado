@@ -22,11 +22,10 @@ export const NameStyled = styled.p`
 const CardStyle = styled.div`
     display: flex;
     flex-direction: column;
-    margin: auto;
-    margin-bottom: 30px;
+    margin: 20px 10px;
     width: 300px;
     height: 170px;
-    box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+    box-shadow: 13px 7px 13px 7px rgba(50, 50, 50, 0.22);
     border: solid grey 1px;
     border-radius: 10%;
     justify-content: center;

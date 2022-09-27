@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import Titulo from "../../Components/Titulo";
 import InputsStyled from "../../Components/InputsStyled";
 import ButtonsStyled from "../../Components/ButtonsStyled";
-import LoginStyled from "./LoginStyled";
+import {LoginStyled, ClickToSignUp} from "./LoginStyled";
 
 const LoginPage = () => {
   const { form, onChange, clearFields } = useForm({
@@ -67,9 +67,9 @@ const LoginPage = () => {
         required
       />
       <ButtonsStyled onClick={() => login()}>Entrar</ButtonsStyled>
-      <p onClick={() => goToSignUpPage(navigate)}>
+      <ClickToSignUp onClick={() => goToSignUpPage(navigate)}>
         <b>Não Possui cadastro? Clique aqui.</b>
-      </p>
+      </ClickToSignUp>
     </LoginStyled>
   );
 };

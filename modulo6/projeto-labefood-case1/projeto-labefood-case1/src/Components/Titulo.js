@@ -8,6 +8,7 @@ export const TituloStyled = styled.h2`
   color: #E86E5A;
   font-weight: 900;
   font-family: Roboto, Bold, 16px Center;
+  margin: 50px;
 `
 
 const Titulo = () => {
