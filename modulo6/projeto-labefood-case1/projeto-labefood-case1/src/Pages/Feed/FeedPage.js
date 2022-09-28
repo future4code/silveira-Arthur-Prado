@@ -7,7 +7,7 @@ import CardStyle, {
 } from "../../Components/CardStyle";
 import InputsStyled from "../../Components/InputsStyled";
 import styled from "styled-components";
-import FeedStyled from "./FeedStyled";
+import {DivShippingDelivery, FeedStyled} from "./FeedStyled";
 import Footer from "../../Components/Footer";
 import useProtectedPage from "../../Hooks/useProtectedPage";
 import FilterByType from "../../Components/FilterByType";
@@ -84,12 +84,14 @@ const FeedPage = () => {
           <NameStyled>
             <b>{card.name}</b>
           </NameStyled>
+          <DivShippingDelivery>
           <ParagraphStyled>
-            <b>Tempo de entrega: </b> {card.deliveryTime} min
+            {card.deliveryTime} min
           </ParagraphStyled>
           <ParagraphStyled>
-            <b>Frete:</b> R${card.shipping},00
+            Frete R${card.shipping},00
           </ParagraphStyled>
+          </DivShippingDelivery>
         </CardStyle>
       );
     });

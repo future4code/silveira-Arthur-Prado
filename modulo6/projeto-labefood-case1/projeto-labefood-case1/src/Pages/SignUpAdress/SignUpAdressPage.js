@@ -6,7 +6,7 @@ import InputsStyled from "../../Components/InputsStyled";
 import { BaseURL } from "../../Constants/BaseURL";
 import useForm from "../../Hooks/useForm";
 import { goToFeedPage } from "../../Routes/Coordinator";
-import SignUpAdressStyled from "./SignUpAdressStyled";
+import {SignUpAdressStyled, TitlePage} from "./SignUpAdressStyled";
 
 const SignUpAdressPage = () => {
   const { form, onChange, clearFields } = useForm({
@@ -39,9 +39,9 @@ const SignUpAdressPage = () => {
   return (
     <SignUpAdressStyled>
       <Header />
-      <p>
+      <TitlePage>
         <b>Meu endereço</b>
-      </p>
+      </TitlePage>
       <InputsStyled
         name={"street"}
         type={"street"}

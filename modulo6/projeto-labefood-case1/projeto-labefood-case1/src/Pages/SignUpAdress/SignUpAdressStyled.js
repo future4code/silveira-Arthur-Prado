@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-const SignUpAdressStyled = styled.div`
+export const SignUpAdressStyled = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 `
-export default SignUpAdressStyled
+
+export const TitlePage = styled.p`
+    margin: 20px 10px 10px 10px;
+`
+

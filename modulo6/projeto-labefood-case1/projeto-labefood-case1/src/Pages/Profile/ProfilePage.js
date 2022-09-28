@@ -32,7 +32,7 @@ const ProfilePage = () => {
   return (
     <div>
       <HeaderProfile>
-        <p onClick={() => goBack(navigate)}>↩</p>
+        <p onClick={() => goBack(navigate)}>ᐸ</p>
         <HeaderParagraph>
           <b>Meu perfil</b>
         </HeaderParagraph>

@@ -19,6 +19,7 @@ const FooterStyle = styled.div`
   align-items: center;
   position: fixed;
   bottom: 0;
+  margin-top: 20px;
 `;
 
 const PStyle = styled.p`

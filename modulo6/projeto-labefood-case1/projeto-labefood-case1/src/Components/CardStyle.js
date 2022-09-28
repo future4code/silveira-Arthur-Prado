@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const ImgStyled = styled.img`
     width: 300px;
-    height: 100px;
+    height: 120px;
     border-radius: 10%;
+
 `
 export const ParagraphStyled = styled.p`
     margin: 2px;
@@ -22,7 +23,7 @@ export const NameStyled = styled.p`
 const CardStyle = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 20px 10px;
+    margin: 20px 0 50px 0;
     width: 300px;
     height: 170px;
     box-shadow: 13px 7px 13px 7px rgba(50, 50, 50, 0.22);

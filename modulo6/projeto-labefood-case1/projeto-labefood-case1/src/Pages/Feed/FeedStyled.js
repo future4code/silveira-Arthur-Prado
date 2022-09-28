@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
-const FeedStyled = styled.div`
+export const FeedStyled = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 `
-export default FeedStyled
+export const DivShippingDelivery = styled.div`
+    display: flex;
+    align-self: normal;
+    justify-content: space-between;
+    margin: 0 15px;
+`

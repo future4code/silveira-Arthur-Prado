@@ -12,6 +12,8 @@ const ArrowStyle = styled.p`
    display: flex;
    align-items: center;
    height: 10px;
+   margin-top: 12px;
+   margin-left: 5px;
 `
 
 const Header = () => {

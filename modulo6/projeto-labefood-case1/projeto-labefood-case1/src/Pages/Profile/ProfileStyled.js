@@ -9,7 +9,7 @@ export const HeaderProfile = styled.div`
     justify-content: space-between;
 `
 export const HeaderParagraph = styled.p`
-    margin: 10px 157px 10px 0;
+    margin: 10px 160px 10px 0;
 `
 
 export const CardAddress = styled.div`
@@ -34,3 +34,4 @@ export const OrderHistoryParagraph = styled.p`
     margin-left: 5px;
     padding: 0;
 `
+
