@@ -28,3 +28,4 @@ export const ParagraphTitleDetails = styled.p`
  margin: 0 10px 10px 15px;
  color: #E86E5A;
 `
+

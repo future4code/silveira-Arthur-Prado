@@ -44,6 +44,20 @@ const Preco = styled.h3`
   margin-bottom: 5px;
 `;
 
+const AddButton = styled.button`
+  width: 5.625rem;
+  height: 1.938rem;
+  border-radius: 8px 0 8px 0;
+  background-color: white;
+  outline: 0;
+  border: 1px black solid;
+`;
+const PrecoEButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0 0 0;
+`;
+
 const CardProductStyled = (props) => {
   return (
     <MainContainer>
@@ -53,14 +67,17 @@ const CardProductStyled = (props) => {
       <ContainerDetails>
         <Name>{props.nome}</Name>
         <Descricao>{props.descricao}</Descricao>
-        <Preco>
-          <b>
-            {props.preco.toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </b>
-        </Preco>
+        <PrecoEButton>
+          <Preco>
+            <b>
+              {props.preco.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </b>
+          </Preco>
+          <AddButton>Adicionar</AddButton>
+        </PrecoEButton>
       </ContainerDetails>
     </MainContainer>
   );
